@@ -12,14 +12,15 @@ import sys
 import subprocess
 
 BASE_PORT = 10531
+
 IP = 'a2.dongshenggame.cn'
 NAME = 'ds_pickfish_%s'
 code = 'CNY'
 
 gameServerCounts = {
-    5000       :       1,
-    5001       :       1,
-    5002       :       1,
+    5000       :       2,
+    5001       :       2,
+    5002       :       2,
 }
 
 for gameId, count in gameServerCounts.iteritems():

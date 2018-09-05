@@ -4,6 +4,7 @@ import sys
 from twisted.python.log import msg
 from twisted.python.logfile import DailyLogFile
 import traceback
+import os
 #from twisted.python.lockfile import FilesystemLock, isLocked
 
 LOG_LEVEL_DEBUG = 1
@@ -38,6 +39,19 @@ def log(txt, log_level = LOG_LEVEL_TEST):
         except Exception as e:
             print 'log File error'
             print traceback.format_exc()
+'''
+
+def log(txt,log_level = LOG_LEVEL_TEST):
+    LOG_PATH = os.path.join(os.path.dirname(__file__), "logs")
+    log_name = datetime.strftime(datetime.now(),'%Y_%m_%d') + ".log"
+    filename = os.path.join(LOG_PATH,log_name)
+    time_str = str(datetime.now())
+    head = log_level+"["+str(time_str)+"]"
+    with open(filename,'a') as f:
+        f.write(head)
+        f.write(txt)
+        f.write('\n')
+'''
 
 class HourLogFile(DailyLogFile):
     def __init__(self, name, directory, exist_postfix = ''):

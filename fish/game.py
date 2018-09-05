@@ -429,7 +429,7 @@ class Game(CommonGame):
 
             self.fishMgr.remove(fish)
             self.fishMgr.outRemove(fish)
-            log(u'[try fish out]fish id[%d] level[%s] remove succeed.'%(fishId, fish.level), LOG_LEVEL_RELEASE)
+            #log(u'[try fish out]fish id[%d] level[%s] remove succeed.'%(fishId, fish.level), LOG_LEVEL_RELEASE)
 
         self.fishMgr.refresh(timestamp)
 

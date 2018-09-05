@@ -150,9 +150,6 @@ class CommonServer(Server):
         pipe.delete(SERVER2ROOM%self.serviceTag)
         pipe.rpush(FORMAT_GAME_SERVICE_SET%(self.ID), self.table)
 
-        print FORMAT_GAME_SERVICE_SET%(self.ID)
-        print self.table
-
         #清空原服务器下的所有断线重连信息
         serverExitPlayer = SERVER_EXIT_PLAYER_FISH%(self.serviceTag, self.ID)
         if redis.exists(serverExitPlayer):

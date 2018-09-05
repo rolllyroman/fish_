@@ -11,8 +11,8 @@ Description: Describe module function
 import sys
 import subprocess
 
-BASE_PORT = 12345
-IP = '192.168.0.99'
+BASE_PORT = 10531
+IP = 'a2.dongshenggame.cn'
 NAME = 'ds_pickfish_%s'
 code = 'CNY'
 

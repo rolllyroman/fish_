@@ -88,6 +88,7 @@ class CommonServer(Server):
 
         redis = self.getPublicRedis()
         print '---------------------------- 2 --------------------------------------'
+        '''
         while 1:
             try:
                 redis.get(FORMAT_IP2CONTRYCODE)
@@ -96,6 +97,7 @@ class CommonServer(Server):
                 time.sleep(5)
             else:
                 break
+        '''
         print '---------------------------- 2.5 --------------------------------------'
 
         #需要初始化代理和房间号池
@@ -105,7 +107,6 @@ class CommonServer(Server):
             log('need init: room[%s]:[%s]'%('setRoomSet.py', hasRoom), LOG_LEVEL_RELEASE)
             e = None
             assert e
-        print '---------------------------- 3 --------------------------------------'
 
         serviceTag = self.serviceTag.split(':')
         self.ID = serviceTag[-1]

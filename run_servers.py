@@ -18,9 +18,9 @@ NAME = 'ds_pickfish_%s'
 code = 'CNY'
 
 gameServerCounts = {
-    5000       :       2,
-    5001       :       2,
-    5002       :       2,
+    5000       :       1,
+    #5001       :       1,
+    #5002       :       1,
 }
 
 for gameId, count in gameServerCounts.iteritems():

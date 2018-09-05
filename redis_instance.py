@@ -14,5 +14,5 @@ redisdb = None
 
 def getInst(dbNum):
     global redisdb
-    redisdb = redis.ConnectionPool(host="192.168.16.50", port=6379, db=dbNum, password='Fkkg65NbRwQOnq01OGMPy5ZREsNUeURm')
+    redisdb = redis.ConnectionPool(host="127.0.0.1", port=6379, db=dbNum, password='Fkkg65NbRwQOnq01OGMPy5ZREsNUeURm')
     return redis.Redis(connection_pool=redisdb)

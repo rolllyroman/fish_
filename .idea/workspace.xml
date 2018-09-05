@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b876f244-a47d-4c1e-bfcb-1ffbaa9a1efc" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/redis_instance.py" afterPath="$PROJECT_DIR$/redis_instance.py" />
+      <change beforePath="$PROJECT_DIR$/common/common_server.py" afterPath="$PROJECT_DIR$/common/common_server.py" />
+      <change beforePath="$PROJECT_DIR$/common/peer.py" afterPath="$PROJECT_DIR$/common/peer.py" />
+      <change beforePath="$PROJECT_DIR$/common/server.py" afterPath="$PROJECT_DIR$/common/server.py" />
+      <change beforePath="$PROJECT_DIR$/run_server.py" afterPath="$PROJECT_DIR$/run_server.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -16,8 +19,18 @@
       <file leaf-file-name="run_server.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/run_server.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-192">
-              <caret line="39" column="25" lean-forward="false" selection-start-line="39" selection-start-column="25" selection-end-line="39" selection-end-column="25" />
+            <state relative-caret-position="640">
+              <caret line="42" column="14" lean-forward="false" selection-start-line="42" selection-start-column="14" selection-end-line="42" selection-end-column="14" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="peer.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/common/peer.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-999">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -58,30 +71,28 @@
       <file leaf-file-name="common_server.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/common/common_server.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="370">
-              <caret line="108" column="19" lean-forward="false" selection-start-line="108" selection-start-column="19" selection-end-line="108" selection-end-column="19" />
+            <state relative-caret-position="-925">
+              <caret line="103" column="0" lean-forward="false" selection-start-line="103" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="server.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="server.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/common/server.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3393">
-              <caret line="29" column="22" lean-forward="false" selection-start-line="29" selection-start-column="22" selection-end-line="29" selection-end-column="22" />
-              <folding>
-                <element signature="e#127#188#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="11">
+              <caret line="24" column="11" lean-forward="true" selection-start-line="24" selection-start-column="11" selection-end-line="24" selection-end-column="11" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="redis_instance.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="redis_instance.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/redis_instance.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="592">
-              <caret line="16" column="49" lean-forward="false" selection-start-line="16" selection-start-column="49" selection-end-line="16" selection-end-column="49" />
+            <state relative-caret-position="148">
+              <caret line="4" column="11" lean-forward="false" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="11" />
               <folding />
             </state>
           </provider>
@@ -97,6 +108,8 @@
       <find>getPublicRedis</find>
       <find>FORMAT_IP2CONTRYCODE</find>
       <find>GAME_ROOM_SET</find>
+      <find>===</find>
+      <find>---</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -105,11 +118,11 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/common/server.py" />
-        <option value="$PROJECT_DIR$/run_server.py" />
         <option value="$PROJECT_DIR$/run_servers.py" />
-        <option value="$PROJECT_DIR$/common/common_server.py" />
         <option value="$PROJECT_DIR$/redis_instance.py" />
+        <option value="$PROJECT_DIR$/common/common_server.py" />
+        <option value="$PROJECT_DIR$/run_server.py" />
+        <option value="$PROJECT_DIR$/common/server.py" />
       </list>
     </option>
   </component>
@@ -272,9 +285,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1887">
           <caret line="51" column="0" lean-forward="true" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
-          <folding>
-            <element signature="e#127#188#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -314,9 +325,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="629">
           <caret line="26" column="37" lean-forward="false" selection-start-line="26" selection-start-column="37" selection-end-line="26" selection-end-column="37" />
-          <folding>
-            <element signature="e#127#188#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -339,14 +348,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/run_server.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-192">
-          <caret line="39" column="25" lean-forward="false" selection-start-line="39" selection-start-column="25" selection-end-line="39" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/run_servers.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="740">
@@ -355,28 +356,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/common/server.py">
+    <entry file="file://$PROJECT_DIR$/redis_instance.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3393">
-          <caret line="29" column="22" lean-forward="false" selection-start-line="29" selection-start-column="22" selection-end-line="29" selection-end-column="22" />
-          <folding>
-            <element signature="e#127#188#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="148">
+          <caret line="4" column="11" lean-forward="false" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="11" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/common/common_server.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
-          <caret line="108" column="19" lean-forward="false" selection-start-line="108" selection-start-column="19" selection-end-line="108" selection-end-column="19" />
+        <state relative-caret-position="-925">
+          <caret line="103" column="0" lean-forward="false" selection-start-line="103" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/redis_instance.py">
+    <entry file="file://$PROJECT_DIR$/run_server.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="592">
-          <caret line="16" column="49" lean-forward="false" selection-start-line="16" selection-start-column="49" selection-end-line="16" selection-end-column="49" />
+        <state relative-caret-position="640">
+          <caret line="42" column="14" lean-forward="false" selection-start-line="42" selection-start-column="14" selection-end-line="42" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/peer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-999">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/server.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="11">
+          <caret line="24" column="11" lean-forward="true" selection-start-line="24" selection-start-column="11" selection-end-line="24" selection-end-column="11" />
           <folding />
         </state>
       </provider>

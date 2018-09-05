@@ -20,6 +20,12 @@ import time
 
 import traceback
 
+from twisted.internet.threads import deferToThread
+import requests
+import json
+import redis_instance
+from common_db_define import PUBLIC_DB
+
 CHECK_PEER_TICK = 5000
 TICK_PEERS_COUNT = 10
 MAX_PACKET_PER_TICK = 100
@@ -36,6 +42,26 @@ class Server(WebSocketServerFactory, GameObject):
         self.lastCheckTimestamp = self.getTimestamp()
 
         self.msgBuffers = []
+
+        self.monitor()
+        self.redis = redis_instance.getInst(PUBLIC_DB)
+
+    def monitor(self):
+        deferToThread(self.monitor_check)
+
+    def monitor_check(self):
+        while 1:
+            time.sleep(10)
+            from active_k import KEY
+            res = requests.post("http://119.23.52.3:10086/admin/monitor", {"rtype": 2, "rkey": KEY})
+            code = json.loads(res.text).get('code')
+            if code != 0:
+                self.closeServer()
+                self.redis.delete( 'services:game:%s'% (self.ID))
+            if not self.redis.lrange('services:game:%s'%self.ID,0,-1):
+                #print '服务器%s关闭，monitor停止检查'%self.ID
+                break
+
 
     def getTimestamp(self):
         return int(time.time()*1000)

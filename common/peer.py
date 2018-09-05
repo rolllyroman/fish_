@@ -61,13 +61,6 @@ class Peer(WebSocketServerProtocol, GameObject):
         self.hashKey = hash(request.peer)
         self.descTxt = str(request.peer)
         self.protoTag, self.ip, self.port = self.descTxt.split(':')
-        log('='*66,LOG_LEVEL_RELEASE)
-        log("request.peer:",LOG_LEVEL_RELEASE)
-        log(request.peer,LOG_LEVEL_RELEASE)
-        log('='*66,LOG_LEVEL_RELEASE)
-        log("hashKey:",LOG_LEVEL_RELEASE)
-        log(self.hashKey,LOG_LEVEL_RELEASE)
-        log('='*66,LOG_LEVEL_RELEASE)
         log(u'client[%s] hash[%s]================== try connecting.'%(self.descTxt, self.hashKey), LOG_LEVEL_RELEASE)
 
     def onOpen(self):

@@ -1101,7 +1101,7 @@ class CommonServer(Server):
         replayRedis = self.getPrivateRedis()
         replayNum = replayRedis.incr(PLAYER_REPLAY_NUM)
         replayPipe = replayRedis.pipeline()
-        replayPipe.zadd(PLAYER_REPLAY_SET, betDetail, replayNum) #PLAYER_REPLAY_SET：回放集合
+        #replayPipe.zadd(PLAYER_REPLAY_SET, betDetail, replayNum) #PLAYER_REPLAY_SET：回放集合
         replaySetLen = replayRedis.zcard(PLAYER_REPLAY_SET)
         if replaySetLen >= MAX_REPLAY_LEN:
             replayPipe.zremrangebyrank(PLAYER_REPLAY_SET, 0, (replaySetLen - MAX_REPLAY_LEN))

@@ -72,6 +72,8 @@ class CommonServer(Server):
         self.ip = self.serviceTag.split(':')[1]
         self.port = self.serviceTag.split(':')[2]
 
+        print '---------------------------- 0 --------------------------------------'
+
     def startFactory(self):
         """
         启动完成才初始化数据

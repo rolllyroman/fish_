@@ -1,0 +1,13 @@
+package betDetail;
+
+message betData {
+    required fixed64 timestamp = 1;
+    required fixed32 bet = 2;
+    required sfixed32 profit = 3;
+    required fixed32 tax = 4;
+    repeated fixed32 fishes = 5;
+}
+
+message betDetail {
+    repeated betData betDatas = 1;
+}

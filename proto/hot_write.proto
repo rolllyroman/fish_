@@ -1,0 +1,20 @@
+package hot_write;
+
+
+//为防止编号冲突，扩展协议命名需从0x00002001或0x00003001之类的位置开始
+
+enum MSG_HEADER {
+    C_S_HOT_WRITE = 0x00002001; //
+}
+
+
+//动态修改水上水下以及抽水线
+
+message C_S_Hot_write {
+    // 水上
+    required  float Aquatic = 1;
+    // 水下
+    required  float UnderWater =2;
+    // 抽水线
+    required  float pump = 3;
+}

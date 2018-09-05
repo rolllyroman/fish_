@@ -1,0 +1,387 @@
+package pickfish;
+
+enum MSG_HEADER {
+    C_S_CONNECTING = 0x00000001;
+    C_S_FIRE = 0x00000002;
+    C_S_FISH_OUT = 0x00000003;
+    C_S_HIT_FISH = 0x00000004;
+    C_S_SWITCH_GUN = 0x00000005;
+    C_S_LOCK_FISH = 0x00000006;
+    C_S_EXIT_ROOM = 0x00000007;
+    C_S_GOLD_TIME_COUNT = 0x00000008;
+    C_S_PING = 0x00000009;
+    C_S_DEBUG_CONNECTING = 0x0000000a; //测试模式登录
+    C_S_LOCK_FISH_START = 0x0000000b; //开启锁鱼
+    C_S_GET_RANK = 0x0000000c;
+    C_S_CANNON_SKIN = 0x0000000d;
+
+    S_C_TRY_REG_FAILED = 0x00001001;
+    S_C_JOIN_GAME_RESULT = 0x00001002;
+    S_C_JOIN_ROOM = 0x00001003;
+    S_C_EXIT_GAME = 0x00001004;
+    S_C_FIRE = 0x00001005;
+    S_C_GENERATE_FISH = 0x00001006;
+    S_C_PICK_FISH = 0x00001007;
+    S_C_SWITCH_GUN = 0x00001008;
+    S_C_CONNECTED = 0x00001009;
+    S_C_LOCK_FISH = 0x0000100a;
+    S_C_FISH_ARRAY = 0x0000100b;
+    S_C_NOTICE = 0x0000100c;
+    S_C_GUN_TYPE_CHANGED = 0x0000100d;
+    S_C_DISCONNECTED = 0x0000100e;
+    S_C_GOLD_TIME_RESULT = 0x0000100f;
+    S_C_PONG = 0x00001010;
+    S_C_COIN_REFRESH = 0x0000101a;
+    S_C_FISH_HIT_COUNT = 0x0000101b;
+    S_C_LOCK_FISH_START = 0x0000101c; //开启锁鱼
+    S_C_RANK_INFO = 0x0000101d;
+    S_C_ALL_FREEZING = 0x0000101e;
+    S_C_FREEZE_OVER = 0x0000101f;
+    S_C_CANNON_SKIN = 0x00001020;
+}
+
+enum CLIENT_KIND {
+    CLIENT_WEB = 0;
+    CLIENT_ANDROID = 1;
+    CLIENT_IOS = 2;
+}
+
+
+
+//建立连接
+message C_S_Connecting {
+    required string sid = 1; //sid
+}
+
+message C_S_Fire {
+    repeated fixed32 bulletIds = 1;
+    required float dirX = 2;
+    required float dirY = 3;
+    required fixed64 timestamp = 4;
+    required fixed32 gunType = 5;
+}
+
+message C_S_FishOut {
+    required fixed64 timestamp = 1;
+    repeated fixed32 fishIds = 2;
+}
+
+message C_S_HitFish {
+    required fixed32 bulletId = 1;
+    required fixed64 timestamp = 2;
+    repeated fixed32 fishIds = 3;
+}
+
+message C_S_SwitchGun {
+    required bool upgrade = 1;
+}
+
+//黄金时刻客户端总点击数
+message C_S_GoldTimeCount {
+    required fixed32 count = 1;
+}
+
+message C_S_LockFish {
+    required fixed64 timestamp = 1;
+    required fixed32 fishId = 2;
+    required bool isLocked = 3;
+}
+
+message C_S_ExitRoom {
+}
+
+message C_S_Ping {
+}
+
+//连接模式
+enum CONNECT_MODE{
+    ACCOUNT_PASSWD = 0; //账号登录，debug模式1
+    ALL_PLAYER = 1; //单人控制全部账号模式，debug模式2
+}
+
+//建立连接，测试模式
+message C_S_DebugConnecting {
+    message JoinRoomInfo{
+        required fixed32 action = 1; //0为加入房间，1为创建房间
+        optional string roomid = 2; //加入房间时需要房间号
+        optional string rule = 3; //创建房间时需要规则
+    }
+
+    required string account = 1;
+    required string passwd = 2;
+    required CONNECT_MODE mode = 5; //连接模式
+    optional JoinRoomInfo roomSetting = 6; //debug模式下需要传入创建房间和加入房间相关参数
+}
+//开启锁鱼
+message C_S_LockFishStart {
+}
+
+message C_S_GetRank {
+}
+
+message S_C_TryRegFailed {
+    required string reason = 1;
+}
+
+//玩家信息
+message PlayerInfo {
+    required fixed32 side = 1; //位置
+    required string nickname = 2; //昵称
+    optional sfixed64 coin = 4; //金币，预留
+    optional string ip = 6; //ip
+    optional fixed32 sex = 7; //性别
+    optional fixed32 roomCards = 8; //房卡数
+    optional string headImgUrl = 9; //头像链接
+    optional bool isGM = 10;//是否GM
+    optional fixed32 id = 11;
+    optional string account = 12;
+    optional fixed32 gunLevel = 13;
+    //x100
+    optional fixed32 gunCoin = 14;
+    //黄金时刻小雕像完成个数
+    optional fixed32 goldTimeCount = 15;
+    optional fixed32 ticket = 16; //奖卷数量
+    optional fixed32 lockCount = 17; //剩余锁鱼数量
+}
+
+message FishData {
+    required fixed32 id = 1;
+    required fixed32 idx = 2;
+    required fixed64 timestamp = 3;
+    required fixed64 outTimestamp = 4;
+    //是否是魔幻气泡鱼
+    required bool isDice = 5;
+    optional fixed32 hitCount = 6;
+}
+
+message S_C_JoinGameResult {
+    message GameInfo {
+        optional fixed32 roomId = 1;
+        optional string roomName = 2;
+        required fixed64 timestamp = 3;
+        required fixed32 bgIdx = 4;
+        //是否处于鱼阵中
+        required bool isArray = 5;
+        repeated PlayerInfo playerList = 6;
+        repeated FishData fishList = 7;
+    }
+    required bool result = 1;
+    optional string reason = 2;
+    required PlayerInfo selfInfo = 3;
+    required bool isTrial = 4;
+    required GameInfo gameInfo = 5;
+}
+
+message S_C_JoinRoom {
+    required PlayerInfo info = 1;
+}
+
+message S_C_ExitGame {
+    required PlayerInfo info = 1;
+}
+
+message S_C_Fire {
+    required fixed64 timestamp = 1;
+    repeated fixed32 bulletIds = 2;
+    required fixed32 side = 3;
+    required float dirX = 4;
+    required float dirY = 5;
+    required fixed32 gunType = 6;
+}
+
+message S_C_GenerateFish {
+    repeated FishData fishs = 1;
+}
+
+message PickFishData {
+    required fixed32 fishId = 1;
+    required fixed32 fishRate = 2;
+    //x100
+    required fixed32 gainCoin = 3;
+    //骰子点数
+    optional fixed32 dice = 4;
+    //奖票
+    optional TicketData ticket = 5;
+    optional fixed32 showGainCoin = 6; //展示的数字
+}
+
+//聚宝盆数据:$金币增量+$对应倍率
+message LuckyBoxData {
+    //x100
+    required fixed32 coin = 1;
+    required fixed32 rate = 2;
+}
+
+//黄金时刻
+message GoldTimeData {
+    required bool isCompleted = 1;
+    required fixed32 count = 2;
+    optional fixed32 gunLevel = 3;
+    //x100
+    optional fixed32 gunCoin = 4;
+    optional fixed32 durationSecs = 5;
+    optional fixed32 maxClickCount = 6;
+}
+
+//奖票
+message TicketData {
+    required fixed32 count = 1; //奖票数量
+    optional fixed32 type = 2; //奖票类型，展示预留不使用
+    required fixed32 coin = 3; //金币价值
+}
+
+message S_C_PickFish {
+    required fixed32 side = 1;
+    repeated PickFishData fishs = 2;
+    //x100
+    required fixed32 coin = 3;
+    optional fixed32 bombFishId = 4;
+    //聚宝盆额外奖励金币
+    repeated LuckyBoxData luckyBoxes = 5;
+    //只有黄金时刻任务发生变化才会填充
+    optional GoldTimeData goldTime = 6;
+    optional fixed32 showCoin = 7;
+}
+
+message S_C_SwitchGun {
+    required fixed32 side = 1;
+    required fixed32 gunLevel = 2;
+    //x100
+    required fixed32 gunCoin = 3;
+}
+
+//个人信息
+message MyInfo{
+    message RoomInfo {
+        message GunLevel {
+            required fixed32 level = 1;
+            //x100
+            required fixed32 coinMin = 2;
+            //x100
+            required fixed32 coinMax = 3;
+            //x100
+            required fixed32 stepCoin = 4;
+        }
+        optional string roomId = 1; //编号
+        optional string roomName = 2; //房间名
+        required fixed64 timestamp = 3;
+        repeated PlayerInfo playerList = 4; //其他玩家的信息
+        optional string roomSetting = 5; //房间设置，鬼牌等各种
+        repeated fixed32 bulletSpeeds = 6;
+        repeated fixed32 fishesCapacity = 7;
+        repeated GunLevel gunLevels = 8;
+        required fixed32 bgIdx = 9;
+        //是否处于鱼阵中
+        required bool isArray = 10;
+        repeated FishData fishList = 11;
+        optional fixed32 playerCount = 12; //房间最大人数
+    }
+    optional RoomInfo roomInfo = 1; //房间数据
+    optional PlayerInfo selfInfo = 2; //个人信息
+}
+
+//建立连接
+message S_C_Connected {
+    optional MyInfo myInfo = 1;
+    required bool result = 2;//是否成功
+    optional string reason = 3; //失败原因
+}
+
+message S_C_LockFish {
+    required fixed32 side = 1;
+    required fixed32 fishId = 2;
+    required bool isLocked = 3;
+}
+
+message S_C_FishArray {
+    required fixed64 timestamp = 1;
+    required fixed32 bgIdx = 2;
+    repeated FishData fishs = 3;
+}
+
+//公告广播
+message S_C_Notice {
+    required string txt = 1;
+    optional fixed32 repeatTimes = 2;
+    optional fixed32 repeatInterval = 3;
+    required fixed32 id = 4;
+}
+
+message S_C_GunTypeChanged {
+    required fixed32 side = 1;
+    required fixed32 gunType = 2;
+}
+
+//黄金时刻结果：$side玩家的$金币增量/$倍率
+message S_C_GoldTimeResult {
+    required fixed32 side = 1;
+    //x100
+    required fixed32 coin = 2;
+    required fixed32 rate = 3;
+}
+
+message S_C_Disconnected {
+    required string reason = 1;
+    required fixed32 actionType = 2; //1重连2回大厅3大退
+}
+
+message S_C_Pong {
+}
+
+message S_C_CoinRefresh {
+    required fixed32 side = 1;
+    //x100
+    required sfixed32 deltaCoin = 2;
+}
+
+message S_C_FishHitCount {
+    required fixed32 fishId = 1;
+    required fixed32 count = 2;
+}
+
+//开启锁鱼反馈
+message S_C_LockFishStart{
+    required bool result = 1; //是否成功
+    required fixed32 count = 2; //剩余次数
+    optional fixed64 timestamp = 3; //持续时间，预留一个字段暂时不使用
+}
+
+message S_C_RankInfo {
+    message Rank {
+        required fixed32 rank = 1; //当rank = 10000时显示“未入榜”
+        required string nickname = 2;
+        required sfixed64 score = 3;
+        optional fixed32 level = 4;
+    }
+    message RankInfo {
+        required bool enabled = 1; //是否使用
+        repeated Rank rankList = 2;
+    }
+    required RankInfo rankForCoin = 1; //金币排名，不使用
+    required RankInfo rankForProfit = 2; //输赢排名，不使用
+    required RankInfo rankForFish = 3; //捕鱼数量排名，不使用
+    required RankInfo rankForTicket = 4; //奖票排名
+}
+
+message S_C_AllFreezing {
+    required fixed32 seconds = 1;
+    required fixed32 fishLevel = 2; //冰冻鱼的level，一般写死用不到
+    required fixed32 id = 3;//触发冰冻鱼的id，如果进去前就是冰冻状态的话固定发0
+    required fixed64 endTime = 4; //距离结束还有多久，单位毫秒
+    required bool isStarted = 5; //是否已经开始冰冻，如果中途进入则为True
+    required fixed32 side = 6; //触发的玩家
+    required fixed64 timestamp = 7; //触发的时间戳
+}
+
+message S_C_FreezeOver {
+}
+
+message S_C_Cannon_skin {
+    required fixed32 chair = 1;
+    required fixed32 cannonType  = 2;
+}
+
+message C_S_Cannon_skin {
+    required fixed32 chair = 1;
+    required fixed32 cannonType  = 2;
+}

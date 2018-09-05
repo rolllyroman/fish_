@@ -87,7 +87,6 @@ class CommonServer(Server):
         self.passwdValidator = re.compile(r'^.{8,20}$')
 
         redis = self.getPublicRedis()
-        print '---------------------------- 2 --------------------------------------'
         '''
         while 1:
             try:
@@ -103,11 +102,13 @@ class CommonServer(Server):
         #需要初始化代理和房间号池
         hasRoom = redis.scard(GAME_ROOM_SET)
         # hasAgent = redis.hexists(FORMAT_ADMIN_ACCOUNT_TABLE%('CHNWX'), 'name')
+        print hasRoom
         if not hasRoom:
             log('need init: room[%s]:[%s]'%('setRoomSet.py', hasRoom), LOG_LEVEL_RELEASE)
             e = None
             assert e
 
+        print '---------------------------- 3 --------------------------------------'
         serviceTag = self.serviceTag.split(':')
         self.ID = serviceTag[-1]
         del serviceTag[-1]

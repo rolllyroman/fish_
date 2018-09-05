@@ -72,15 +72,11 @@ class CommonServer(Server):
         self.ip = self.serviceTag.split(':')[1]
         self.port = self.serviceTag.split(':')[2]
 
-        print '---------------------------- 0 --------------------------------------'
 
     def startFactory(self):
         """
         启动完成才初始化数据
         """
-
-        print '---------------------------- 1 --------------------------------------'
-
         self.account2players = {}
         self.account2Sid = {}
         self.trialAccountPool = []
@@ -100,6 +96,7 @@ class CommonServer(Server):
                 time.sleep(5)
             else:
                 break
+        print '---------------------------- 2.5 --------------------------------------'
 
         #需要初始化代理和房间号池
         hasRoom = redis.scard(GAME_ROOM_SET)
@@ -108,13 +105,14 @@ class CommonServer(Server):
             log('need init: room[%s]:[%s]'%('setRoomSet.py', hasRoom), LOG_LEVEL_RELEASE)
             e = None
             assert e
+        print '---------------------------- 3 --------------------------------------'
 
         serviceTag = self.serviceTag.split(':')
         self.ID = serviceTag[-1]
         del serviceTag[-1]
         self.serviceTag = ':'.join(serviceTag)
+        print '---------------------------- 4 --------------------------------------'
 
-        print '---------------------------- 3 --------------------------------------'
         #load game config
         self.globalCtrl = GlobalControl(self)
 
@@ -156,7 +154,6 @@ class CommonServer(Server):
         pipe.hset(self.table, 'roomCount', 0)
         pipe.delete(SERVER2ROOM%self.serviceTag)
         pipe.rpush(FORMAT_GAME_SERVICE_SET%(self.ID), self.table)
-        print '---------------------------- 4 --------------------------------------'
 
         #清空原服务器下的所有断线重连信息
         serverExitPlayer = SERVER_EXIT_PLAYER_FISH%(self.serviceTag, self.ID)

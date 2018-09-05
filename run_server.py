@@ -40,7 +40,6 @@ try:
 except:
     sys.exit()
 
-
 from optparse import OptionParser
 _cmd_parser = OptionParser(usage="usage: %prog [options]")
 _opt = _cmd_parser.add_option
@@ -65,7 +64,7 @@ else:
     from twisted.internet import epollreactor
     epollreactor.install()
 
-def __logToSentry(event):f
+def __logToSentry(event):
     # print(event)
     if not event.get('isError') or 'failure' not in event:
        return

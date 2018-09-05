@@ -76,6 +76,9 @@ class CommonServer(Server):
         """
         启动完成才初始化数据
         """
+
+        print '---------------------------- 1 --------------------------------------'
+
         self.account2players = {}
         self.account2Sid = {}
         self.trialAccountPool = []
@@ -86,6 +89,7 @@ class CommonServer(Server):
         self.passwdValidator = re.compile(r'^.{8,20}$')
 
         redis = self.getPublicRedis()
+        print '---------------------------- 2 --------------------------------------'
         while 1:
             try:
                 redis.get(FORMAT_IP2CONTRYCODE)
@@ -108,6 +112,7 @@ class CommonServer(Server):
         del serviceTag[-1]
         self.serviceTag = ':'.join(serviceTag)
 
+        print '---------------------------- 3 --------------------------------------'
         #load game config
         self.globalCtrl = GlobalControl(self)
 
@@ -149,6 +154,7 @@ class CommonServer(Server):
         pipe.hset(self.table, 'roomCount', 0)
         pipe.delete(SERVER2ROOM%self.serviceTag)
         pipe.rpush(FORMAT_GAME_SERVICE_SET%(self.ID), self.table)
+        print '---------------------------- 4 --------------------------------------'
 
         #清空原服务器下的所有断线重连信息
         serverExitPlayer = SERVER_EXIT_PLAYER_FISH%(self.serviceTag, self.ID)

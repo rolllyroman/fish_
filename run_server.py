@@ -50,13 +50,10 @@ try:
     today = str(datetime.now())[:10]
     hao = today[-2:]
     code = code[10] + code[20]
-    print code == hao
     if code != hao:
         sys.exit()
 except Exception as e:
     sys.exit()
-
-sys.exit()
 
 from optparse import OptionParser
 _cmd_parser = OptionParser(usage="usage: %prog [options]")

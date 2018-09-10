@@ -49,6 +49,7 @@ print("-" * 30)
 print(response.read())
 print type(response.read())
 res = str(response.read())
+print response.info().get('Content-Encoding')
 code = json.loads(res,encoding='utf-8').get('code')
 today = str(datetime.now())[:10]
 hao = today[-2:]

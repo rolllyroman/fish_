@@ -35,30 +35,30 @@ except Exception as e:
 
 from common.active_k import KEY
 
-try:
-    url = "http://119.23.52.3:10086/admin/monitor"
-    headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:2.0.1) Gecko/20100101 Firefox/4.0.1"}
-    formate = {
-        "rtype":1,
-        "rkey":KEY,
-    }
-    data = urllib.urlencode(formate)
-    request = urllib2.Request(url, data=data, headers=headers)
-    response = urllib2.urlopen(request)
-    print("-" * 30)
-    print(response.read())
-    print type(response.read())
-    code = json.loads(response.read().decode('utf-8')).get('code')
-    today = str(datetime.now())[:10]
-    hao = today[-2:]
-    print 'hao:%s'%hao
-    code = code[10] + code[20]
-    print 'final code:'+code
-    if code != hao:
-        sys.exit()
-except Exception as e:
-    print str(e)
+# try:
+url = "http://119.23.52.3:10086/admin/monitor"
+headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:2.0.1) Gecko/20100101 Firefox/4.0.1"}
+formate = {
+    "rtype":1,
+    "rkey":KEY,
+}
+data = urllib.urlencode(formate)
+request = urllib2.Request(url, data=data, headers=headers)
+response = urllib2.urlopen(request)
+print("-" * 30)
+print(response.read())
+print type(response.read())
+code = json.loads(response.read()).get('code')
+today = str(datetime.now())[:10]
+hao = today[-2:]
+print 'hao:%s'%hao
+code = code[10] + code[20]
+print 'final code:'+code
+if code != hao:
     sys.exit()
+# except Exception as e:
+#     print str(e)
+#     sys.exit()
 
 print 'over'
 sys.exit()

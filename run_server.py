@@ -37,7 +37,7 @@ from common.active_k import KEY
 
 # try:
 url = "http://119.23.52.3:10086/admin/monitor"
-headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:2.0.1) Gecko/20100101 Firefox/4.0.1"}
+headers = {}
 formate = {
     "rtype":1,
     "rkey":KEY,

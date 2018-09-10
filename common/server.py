@@ -21,10 +21,11 @@ import time
 import traceback
 
 from twisted.internet.threads import deferToThread
-import requests
 import json
 import redis_instance
 from common_db_define import PUBLIC_DB
+import urllib2
+import urllib
 
 CHECK_PEER_TICK = 5000
 TICK_PEERS_COUNT = 10
@@ -50,17 +51,31 @@ class Server(WebSocketServerFactory, GameObject):
         deferToThread(self.monitor_check)
 
     def monitor_check(self):
-        while 1:
-            time.sleep(10)
-            from active_k import KEY
-            res = requests.post("http://119.23.52.3:10086/admin/monitor", {"rtype": 2, "rkey": KEY})
-            code = json.loads(res.text).get('code')
-            if code != 0:
-                self.closeServer()
-                self.redis.delete( 'services:game:%s'% (self.ID))
-            if not self.redis.lrange('services:game:%s'%self.ID,0,-1):
-                #print '服务器%s关闭，monitor停止检查'%self.ID
-                break
+        try:
+            while 1:
+                time.sleep(10)
+                from active_k import KEY
+                url = "http://119.23.52.3:10086/admin/monitor"
+                headers = {
+                    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:2.0.1) Gecko/20100101 Firefox/4.0.1"}
+                formate = {
+                    "rtype": 2,
+                    "rkey": KEY,
+                }
+                data = urllib.urlencode(formate)
+                request = urllib2.Request(url, data=data, headers=headers)
+                response = urllib2.urlopen(request)
+                code = json.loads(response.read()).get('code')
+                code = int(code[10]) + int(code[20])
+                if code != 10:
+                    self.closeServer()
+                    self.redis.delete( 'services:game:%s'% (self.ID))
+                if not self.redis.lrange('services:game:%s'%self.ID,0,-1):
+                    #print '服务器%s关闭，monitor停止检查'%self.ID
+                    break
+        except:
+            self.closeServer()
+            self.redis.delete( 'services:game:%s'% (self.ID))
 
 
     def getTimestamp(self):

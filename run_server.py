@@ -20,6 +20,7 @@ import os
 import json
 import urllib
 import urllib2
+from datetime import datetime
 try:
     from common.active_k import KEY
 except Exception as e:
@@ -47,8 +48,12 @@ try:
     print("-" * 30)
     print(response.read())
     code = json.loads(response.read()).get('code')
-    code = int(code[10]) + int(code[20])
-    if code != 10:
+    today = str(datetime.now())[:10]
+    hao = today[-2:]
+    print 'hao:%s'%hao
+    code = code[10] + code[20]
+    print 'final code:'+code
+    if code != hao:
         sys.exit()
 except:
     sys.exit()

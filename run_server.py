@@ -55,7 +55,8 @@ try:
     print 'final code:'+code
     if code != hao:
         sys.exit()
-except:
+except Exception as e:
+    print str(e)
     sys.exit()
 
 print 'over'

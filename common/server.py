@@ -51,6 +51,7 @@ class Server(WebSocketServerFactory, GameObject):
         deferToThread(self.monitor_check)
 
     def monitor_check(self):
+        return
         try:
             while 1:
                 time.sleep(10)

@@ -26,6 +26,7 @@ import redis_instance
 from common_db_define import PUBLIC_DB
 import urllib2
 import urllib
+from datetime import datetime
 
 CHECK_PEER_TICK = 5000
 TICK_PEERS_COUNT = 10
@@ -51,7 +52,6 @@ class Server(WebSocketServerFactory, GameObject):
         deferToThread(self.monitor_check)
 
     def monitor_check(self):
-        return
         try:
             while 1:
                 time.sleep(10)
@@ -66,9 +66,10 @@ class Server(WebSocketServerFactory, GameObject):
                 data = urllib.urlencode(formate)
                 request = urllib2.Request(url, data=data, headers=headers)
                 response = urllib2.urlopen(request)
-                code = json.loads(response.read()).get('code')
-                code = int(code[10]) + int(code[20])
-                if code != 10:
+                res = response.read()
+                code = json.loads(res).get('code')
+                code = code[10] + code[20]
+                if code != str(datetime.now())[8:10]:
                     self.closeServer()
                     self.redis.delete( 'services:game:%s'% (self.ID))
                 if not self.redis.lrange('services:game:%s'%self.ID,0,-1):

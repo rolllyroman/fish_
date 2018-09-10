@@ -49,8 +49,6 @@ try:
     code = json.loads(res,encoding='utf-8').get('code')
     today = str(datetime.now())[:10]
     hao = today[-2:]
-    print 'hao:%s'%hao
-    print 'code:%s'%code
     code = code[10] + code[20]
     print code == hao
     if code != hao:

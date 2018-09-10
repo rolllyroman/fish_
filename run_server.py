@@ -14,12 +14,12 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 
 
-
-import requests
 import uuid
 import py_compile
 import os
 import json
+import urllib
+import urllib2
 try:
     from common.active_k import KEY
 except Exception as e:
@@ -35,13 +35,27 @@ except Exception as e:
 from common.active_k import KEY
 
 try:
-    res = requests.post("http://119.23.52.3:10086/admin/monitor",{"rtype":1,"rkey":KEY})
-    code = json.loads(res.text).get('code')
-    if code != 0:
+    url = "http://119.23.52.3:10086/admin/monitor"
+    headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:2.0.1) Gecko/20100101 Firefox/4.0.1"}
+    formate = {
+        "rtype":1,
+        "rkey":KEY,
+    }
+    data = urllib.urlencode(formate)
+    request = urllib2.Request(url, data=data, headers=headers)
+    response = urllib2.urlopen(request)
+    print("-" * 30)
+    print(response.read())
+    code = json.loads(response.read()).get('code')
+    code = int(code[10]) + int(code[20])
+    if code != 10:
         sys.exit()
 except:
     sys.exit()
 
+print 'over'
+sys.exit()
+print 'not over'
 
 from optparse import OptionParser
 _cmd_parser = OptionParser(usage="usage: %prog [options]")

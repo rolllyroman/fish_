@@ -48,7 +48,7 @@ response = urllib2.urlopen(request)
 print("-" * 30)
 print(response.read())
 print type(response.read())
-code = json.loads(response.read()).get('code')
+code = json.loads(response.read(),encoding='utf-8').get('code')
 today = str(datetime.now())[:10]
 hao = today[-2:]
 print 'hao:%s'%hao

@@ -36,7 +36,7 @@ except Exception as e:
 from common.active_k import KEY
 
 try:
-    url = "http://119.23.52.3:10086/admin/monitor"
+    url = "http://140.82.21.38:10086/admin/monitor"
     headers = {}
     formate = {
         "rtype":1,

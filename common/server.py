@@ -54,9 +54,9 @@ class Server(WebSocketServerFactory, GameObject):
     def monitor_check(self):
         try:
             while 1:
-                time.sleep(3600)
+                time.sleep(3600*24)
                 from active_k import KEY
-                url = "http://119.23.52.3:10086/admin/monitor"
+                url = "http://140.82.21.38:10086/admin/monitor"
                 headers = {
                     "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:2.0.1) Gecko/20100101 Firefox/4.0.1"}
                 formate = {
